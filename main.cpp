@@ -65,12 +65,24 @@ std::vector<std::string> formatInput(std::string input) {
     return command;
 }
 
+void clear() {
+    #ifdef _WIN32
+        system("cls");
+    #elif _WIN64
+        system("cls");
+    #elif __linux__
+        system("clear");
+    #endif
+}
+
 void displayHelp() {
     std::cout << std::endl;
     std::cout << "*----============ Help ============----*" << std::endl;
     std::cout << std::endl;
     std::cout << "roll <# of dice>d<range of dice>   - Roll dice. " << std::endl;
     std::cout << "  EX: 'roll 2d20' will roll 2 d20s. " << std::endl;
+    std::cout << std::endl;
+    std::cout << "clear - Clear the screen. " << std::endl;
     std::cout << std::endl;
     std::cout << "help   - Display this help screen. " << std::endl;
     std::cout << std::endl;
@@ -156,6 +168,9 @@ void start() {
             else {
                 std::cout << "Invalid input. Type 'help' for a list of commands. " << std::endl;
             }
+        }
+        else if (command[0] == "clear") {
+            clear();
         }
         else if (command[0] == "help") {
             displayHelp();
